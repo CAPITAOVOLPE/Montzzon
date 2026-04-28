@@ -121,7 +121,7 @@ c.innerHTML+=`
 <div class="glass-card p-6 border-l-4 border-l-yellow-500">
 
 <h3 class="text-lg font-black italic uppercase mb-5">
-Camisa ${pedidosGenero[i-1]==="Homem"?"Masculina":"Feminina"}
+Camisa ${pedidosGenero[i-1]==="Unissex"?"Masculina":"Feminina"}
 </h3>
 
 <p class="text-xs font-bold uppercase text-yellow-400 mb-3 tracking-widest">
