@@ -121,7 +121,7 @@ c.innerHTML+=`
 <div class="glass-card p-6 border-l-4 border-l-yellow-500">
 
 <h3 class="text-lg font-black italic uppercase mb-5">
-Camisa ${pedidosGenero[i-1]==="Unissex"?"Masculina":"Feminina"}
+Camisa ${pedidosGenero[i-1]==="Unissex"?"Unissex":"Feminina"}
 </h3>
 
 <p class="text-xs font-bold uppercase text-yellow-400 mb-3 tracking-widest">
@@ -238,7 +238,7 @@ r+=`*ITENS PEDIDO*\n`;
 
 for(let i=1;i<=_0x1c;i++){
 
-const genero=pedidosGenero[i-1]==="Homem"?"Masculina":"Feminina";
+const genero=pedidosGenero[i-1]==="Unissex"?"Masculina":"Feminina";
 const tm=document.querySelector(`input[name="tamanho_${i}"]:checked`).value;
 const nm=document.getElementById(`personalizacao_${i}`).value||"Sem nome";
 const nr=document.querySelector(`input[name="numero_${i}"]:checked`).value;
