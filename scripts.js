@@ -163,10 +163,10 @@ class="input-field w-full p-4 rounded-xl text-sm font-bold uppercase mb-6"
 Escolha o número
 </p>
 
-<div class="grid grid-cols-5 gap-3">
+<div class="grid grid-cols-5 gap-4">
 
 ${Array.from({length:11},(_,n)=>n+1).map(num=>`
-<label>
+<label class="cursor-pointer">
 
 <input
 type="radio"
@@ -176,20 +176,17 @@ class="hidden peer"
 ${num===10?"checked":""}
 >
 
-<div class="border border-white/10 rounded-xl p-3 peer-checked:border-yellow-400 peer-checked:bg-yellow-500/10 transition">
+<div class="transition-all duration-200 peer-checked:scale-110 peer-checked:brightness-125">
 
-<img src="${num}.png" class="w-full h-16 object-contain mx-auto">
-
-<p class="text-center text-xs font-black mt-1">
-${num}
-</p>
+<img 
+  src="${num}.png" 
+  class="w-full h-[70px] object-contain mx-auto filter drop-shadow-sm"
+>
 
 </div>
 
 </label>
 `).join("")}
-
-</div>
 
 </div>
 `;
