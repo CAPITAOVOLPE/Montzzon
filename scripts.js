@@ -238,7 +238,7 @@ r+=`*ITENS PEDIDO*\n`;
 
 for(let i=1;i<=_0x1c;i++){
 
-const genero=pedidosGenero[i-1]==="Unissex"?"Masculina":"Feminina";
+const genero=pedidosGenero[i-1]==="Unissex"?"Unissex":"Feminina";
 const tm=document.querySelector(`input[name="tamanho_${i}"]:checked`).value;
 const nm=document.getElementById(`personalizacao_${i}`).value||"Sem nome";
 const nr=document.querySelector(`input[name="numero_${i}"]:checked`).value;
