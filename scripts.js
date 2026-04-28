@@ -176,7 +176,7 @@ class="hidden peer"
 ${num===10?"checked":""}
 >
 
-<div class="border border-white/10 rounded-xl p-2 peer-checked:border-yellow-400 peer-checked:bg-yellow-500/10 transition">
+<div class="border border-white/10 rounded-xl p-3 peer-checked:border-yellow-400 peer-checked:bg-yellow-500/10 transition">
 
 <img src="${num}.png" class="w-full h-16 object-contain mx-auto">
 
