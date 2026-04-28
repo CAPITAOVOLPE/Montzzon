@@ -1,4 +1,38 @@
-let _0x1a=null,_0x1b=!1,_0x1c=1,_0x1d="5581989349868",_0x1e=129.9,_0x1f="",_0x20=0;
+let _0x1a=null,_0x1b=!1,_0x1c=1,_0x1d="5581989301530",_0x1e=129.9,_0x1f="",_0x20=0;
+let pedidosGenero=[];
+
+function addGenero(tipo){
+pedidosGenero.push(tipo);
+renderGenero();
+}
+
+function removerGenero(index){
+pedidosGenero.splice(index,1);
+renderGenero();
+}
+
+function renderGenero(){
+const box=document.getElementById("listaGenero");
+box.innerHTML="";
+
+pedidosGenero.forEach((item,index)=>{
+box.innerHTML+=`
+<div class="flex items-center justify-between bg-white/5 rounded-xl px-4 py-3">
+<span class="font-bold uppercase">
+${index+1}. ${item}
+</span>
+
+<button onclick="removerGenero(${index})"
+class="text-red-400 font-black text-xl">
+×
+</button>
+</div>
+`;
+});
+
+_0x1c=pedidosGenero.length;
+document.getElementById("qtyDisplay").innerText=_0x1c;
+}
 
 function _0x21(){
 if(!_0x1a||_0x1b)return;
@@ -11,23 +45,23 @@ _0x1a=document.getElementById("bgMusic");
 _0x21();
 });
 
-document.addEventListener("click",()=>{_0x21()},{once:!0});
-document.addEventListener("touchstart",()=>{_0x21()},{once:!0});
+document.addEventListener("click",()=>{_0x21()},{once:true});
+document.addEventListener("touchstart",()=>{_0x21()},{once:true});
 
 function _0x22(){
-const _0x23=new(window.AudioContext||window.webkitAudioContext)(),
-_0x24=_0x23.createOscillator(),
-_0x25=_0x23.createGain();
+const ctx=new(window.AudioContext||window.webkitAudioContext)(),
+osc=ctx.createOscillator(),
+gain=ctx.createGain();
 
-_0x24.type="triangle";
-_0x24.frequency.value=650;
-_0x25.gain.value=.02;
+osc.type="triangle";
+osc.frequency.value=650;
+gain.gain.value=.02;
 
-_0x24.connect(_0x25);
-_0x25.connect(_0x23.destination);
+osc.connect(gain);
+gain.connect(ctx.destination);
 
-_0x24.start();
-_0x24.stop(_0x23.currentTime+.05);
+osc.start();
+osc.stop(ctx.currentTime+.05);
 }
 
 document.addEventListener("click",e=>{
@@ -71,30 +105,94 @@ if(["AM","PA","RO","RR","AP","AC"].includes(v))return 39.9;
 return 29.9;
 }
 
-function changeQty(v){
-_0x1c=Math.max(1,_0x1c+v);
-document.getElementById("qtyDisplay").innerText=_0x1c;
+function goToStep2(){
+
+if(pedidosGenero.length===0){
+alert("Selecione pelo menos uma camisa.");
+return;
 }
 
-function goToStep2(){
 const c=document.getElementById("itemsContainer");
 c.innerHTML="";
 
 for(let i=1;i<=_0x1c;i++){
+
 c.innerHTML+=`
 <div class="glass-card p-6 border-l-4 border-l-yellow-500">
-<h3 class="text-lg font-black italic uppercase mb-4">Camisa #${i}</h3>
 
-<div class="grid grid-cols-4 gap-2 mb-4">
-${["P","M","G","GG"].map(t=>`
+<h3 class="text-lg font-black italic uppercase mb-5">
+Camisa ${pedidosGenero[i-1]==="Homem"?"Masculina":"Feminina"}
+</h3>
+
+<p class="text-xs font-bold uppercase text-yellow-400 mb-3 tracking-widest">
+Escolha o tamanho
+</p>
+
+<div class="grid grid-cols-5 gap-2 mb-6">
+
+${["PP","P","M","G","GG"].map(t=>`
 <label>
-<input type="radio" name="tamanho_${i}" value="${t}" class="hidden peer" ${t==="M"?"checked":""}>
-<div class="peer-checked:bg-yellow-500 peer-checked:text-black border border-white/10 py-3 text-center rounded-xl font-black text-sm">${t}</div>
-</label>`).join("")}
+<input
+type="radio"
+name="tamanho_${i}"
+value="${t}"
+class="hidden peer"
+${t==="M"?"checked":""}
+>
+
+<div class="peer-checked:bg-yellow-500 peer-checked:text-black border border-white/10 py-3 text-center rounded-xl font-black text-sm">
+${t}
+</div>
+</label>
+`).join("")}
+
 </div>
 
-<input type="text" id="personalizacao_${i}" placeholder="NOME E NÚMERO (OPCIONAL)" class="input-field w-full p-4 rounded-xl text-sm font-bold uppercase">
-</div>`;
+<p class="text-xs font-bold uppercase text-yellow-400 mb-3 tracking-widest">
+Nome
+</p>
+
+<input
+type="text"
+id="personalizacao_${i}"
+placeholder="Digite o nome"
+class="input-field w-full p-4 rounded-xl text-sm font-bold uppercase mb-6"
+>
+
+<p class="text-xs font-bold uppercase text-yellow-400 mb-3 tracking-widest">
+Escolha o número
+</p>
+
+<div class="grid grid-cols-5 gap-3">
+
+${Array.from({length:11},(_,n)=>n+1).map(num=>`
+<label>
+
+<input
+type="radio"
+name="numero_${i}"
+value="${num}"
+class="hidden peer"
+${num===10?"checked":""}
+>
+
+<div class="border border-white/10 rounded-xl p-2 peer-checked:border-yellow-400 peer-checked:bg-yellow-500/10 transition">
+
+<img src="${num}.png" class="w-full h-12 object-contain mx-auto">
+
+<p class="text-center text-xs font-black mt-1">
+${num}
+</p>
+
+</div>
+
+</label>
+`).join("")}
+
+</div>
+
+</div>
+`;
 }
 
 switchStep("step1","step2");
@@ -113,12 +211,20 @@ window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function finalizarPedido(){
+
 const n=document.getElementById("cliente_nome").value,
 c=document.getElementById("cliente_cpf").value,
 t=document.getElementById("cliente_tel").value;
 
-if(!n||!c||!t){alert("Preencha Nome, CPF e WhatsApp.");return}
-if(_0x20===0){alert("Digite um CEP válido.");return}
+if(!n||!c||!t){
+alert("Preencha Nome, CPF e WhatsApp.");
+return;
+}
+
+if(_0x20===0){
+alert("Digite um CEP válido.");
+return;
+}
 
 let s=_0x1e*_0x1c,
 z=s+_0x20,
@@ -127,13 +233,17 @@ r=`*NOVO PEDIDO - MONTZZON 🇧🇷*\n\n`;
 r+=`*Nome:* ${n}\n`;
 r+=`*CPF:* ${c}\n`;
 r+=`*WhatsApp:* ${t}\n\n`;
+
 r+=`*ITENS PEDIDO*\n`;
 
 for(let i=1;i<=_0x1c;i++){
-const tm=document.querySelector(`input[name="tamanho_${i}"]:checked`).value,
-ps=document.getElementById(`personalizacao_${i}`).value||"Sem personalização";
 
-r+=`Item ${i}: ${tm} | ${ps}\n`;
+const genero=pedidosGenero[i-1]==="Homem"?"Masculina":"Feminina";
+const tm=document.querySelector(`input[name="tamanho_${i}"]:checked`).value;
+const nm=document.getElementById(`personalizacao_${i}`).value||"Sem nome";
+const nr=document.querySelector(`input[name="numero_${i}"]:checked`).value;
+
+r+=`Item ${i}: ${genero} | Tam ${tm} | ${nm} | Nº ${nr}\n`;
 }
 
 r+=`\n*ENDEREÇO*\n`;
