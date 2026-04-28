@@ -147,30 +147,42 @@ padding-bottom:env(safe-area-inset-bottom);
 <main class="w-full max-w-md px-5 pt-8 pb-12">
 
 <div class="text-center mb-8">
-<h1 class="text-4xl font-black italic mb-1 tracking-tighter uppercase leading-none">Brasil Pack 2026</h1>
+<h1 class="text-4xl font-black italic mb-1 tracking-tighter uppercase leading-none">Brasil 2026</h1>
 <p class="text-yellow-400 font-bold uppercase tracking-[0.2em] text-[10px]">Edição Especial Limitada</p>
 </div>
 
 <section id="step1" class="step-content active">
+
 <div class="glass-card p-8 text-center shadow-2xl">
 
 <h2 class="text-xl font-bold mb-6 italic uppercase tracking-tight">
-Quantas unidades deseja?
+Escolha os modelos
 </h2>
 
-<div class="flex items-center justify-center gap-8 mb-8">
-<button onclick="changeQty(-1)" class="w-16 h-16 rounded-2xl border-2 border-white/10 text-3xl">-</button>
+<div class="grid grid-cols-2 gap-4 mb-6">
 
-<span id="qtyDisplay" class="text-7xl font-black text-yellow-400">1</span>
+<button onclick="addGenero('Homem')" class="btn-next w-full">
+HOMEM
+</button>
 
-<button onclick="changeQty(1)" class="w-16 h-16 rounded-2xl border-2 border-white/10 text-3xl">+</button>
-</div>
-
-<button onclick="goToStep2()" class="btn-next w-full">
-ESCOLHER TAMANHOS
+<button onclick="addGenero('Mulher')" class="btn-next w-full">
+MULHER
 </button>
 
 </div>
+
+<div id="listaGenero" class="space-y-3 mb-6"></div>
+
+<div class="text-4xl font-black text-yellow-400 mb-6">
+<span id="qtyDisplay">0</span>
+</div>
+
+<button onclick="goToStep2()" class="btn-next w-full">
+ESCOLHER DETALHES
+</button>
+
+</div>
+
 </section>
 
 <section id="step2" class="step-content">
