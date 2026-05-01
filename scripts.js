@@ -1,4 +1,4 @@
-let _0x1a=null,_0x1b=!1,_0x1c=1,_0x1d="5581989301530",_0x1e=129.9,_0x1f="",_0x20=0;
+let _0x1a=null,_0x1b=!1,_0x1c=1,_0x1d="5581989301530",_0x1e=99.76,_0x1f="",_0x20=0;
 let pedidosGenero=[];
 
 function addGenero(tipo){
@@ -121,7 +121,7 @@ c.innerHTML+=`
 <div class="glass-card p-6 border-l-4 border-l-yellow-500">
 
 <h3 class="text-lg font-black italic uppercase mb-5">
-Camisa ${pedidosGenero[i-1]==="Unissex"?"Unissex":"Feminina"}
+Camisa ${pedidosGenero[i-1]==="Masculino"?"Masculino":"Feminina"}
 </h3>
 
 <p class="text-xs font-bold uppercase text-yellow-400 mb-3 tracking-widest">
@@ -235,7 +235,7 @@ r+=`*ITENS PEDIDO*\n`;
 
 for(let i=1;i<=_0x1c;i++){
 
-const genero=pedidosGenero[i-1]==="Unissex"?"Unissex":"Feminina";
+const genero=pedidosGenero[i-1]==="Masculino"?"Masculino":"Feminina";
 const tm=document.querySelector(`input[name="tamanho_${i}"]:checked`).value;
 const nm=document.getElementById(`personalizacao_${i}`).value||"Sem nome";
 const nr=document.querySelector(`input[name="numero_${i}"]:checked`).value;
